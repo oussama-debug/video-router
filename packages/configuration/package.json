@@ -1,0 +1,16 @@
+{
+  "name": "@ojaaouani/configuration",
+  "main": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "mediasoup": "^3.15.6",
+    "@ojaaouani/logger": "workspace:*"
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  }
+}

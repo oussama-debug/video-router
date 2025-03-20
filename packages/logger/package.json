@@ -1,0 +1,21 @@
+{
+  "name": "@ojaaouani/logger",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "clean:build": "rimraf ./dist"
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.4",
+    "chalk": "^5.4.1"
+  }
+}

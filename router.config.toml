@@ -1,0 +1,44 @@
+#work settings
+[worker]
+rtcMinPort = 10000
+rtcMaxPort = 59999
+logLevel = "warn"
+logTags = [
+    "info",
+    "ice",
+    "dtls",
+    "rtp",
+    "srtp",
+    "rtcp",
+    "rtx",
+    "bwe",
+    "score",
+    "simulcast",
+    "svc",
+]
+numWorkers = 4
+
+#router settings
+[[router.mediaCodecs]]
+kind = "audio"
+mimeType = "audio/opus"
+clockRate = 48000
+channels = 2
+
+[[router.mediaCodecs]]
+kind = "video"
+mimeType = "video/VP8"
+clockRate = 90000
+
+[router.mediaCodecs.parameters]
+"x-google-start-bitrate" = 1000
+
+#webrtc transport settings
+[webRtcTransport]
+initialAvailableOutgoingBitrate = 1000000
+minimumAvailableOutgoingBitrate = 600000
+maximumAvailableOutgoingBitrate = 10000000
+
+[[webRtcTransport.listenIps]]
+ip = "0.0.0.0"
+# announcedIp = "192.168.1.1" # Uncomment and set to your public IP
