@@ -1,3 +1,7 @@
-import { configuration } from "./configuration/index.js";
+import Application from "./app.js";
 
-console.log(configuration);
+(async () => {
+    const app = new Application()
+    await app.startMediasoup()
+    app.listen()
+})()

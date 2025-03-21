@@ -42,3 +42,6 @@ maximumAvailableOutgoingBitrate = 10000000
 [[webRtcTransport.listenIps]]
 ip = "0.0.0.0"
 # announcedIp = "192.168.1.1" # Uncomment and set to your public IP
+
+[webServer]
+port = 3000
