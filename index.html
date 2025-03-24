@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mediasoup Server</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Socket.IO Connection Test</h1>
+    <div id="status">Connecting...</div>
+
+    <!-- Import Socket.IO client from the correct location -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+      // Connect to the server with proper options
+      const socket = io("http://localhost:3000", {
+        transports: ["websocket", "polling"],
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+      });
+
+      const statusEl = document.getElementById("status");
+
+      socket.on("connect", () => {
+        console.log("Connected to server with ID:", socket.id);
+        statusEl.textContent = "Connected to server with ID: " + socket.id;
+        statusEl.style.color = "green";
+      });
+
+      socket.on("connect_error", (error) => {
+        console.error("Connection error:", error);
+        statusEl.textContent = "Connection error: " + error;
+        statusEl.style.color = "red";
+      });
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected from server");
+        statusEl.textContent = "Disconnected from server";
+        statusEl.style.color = "orange";
+      });
+    </script>
+  </body>
+</html>

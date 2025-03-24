@@ -1,24 +1,20 @@
-#work settings
+# Server configuration
+listenIp = "0.0.0.0"
+listenPort = 3000
+sslCrt = ""
+sslKey = ""
+
+# Room settings
+roomExpirationSeconds = 86400
+
 [worker]
 rtcMinPort = 10000
 rtcMaxPort = 59999
 logLevel = "warn"
-logTags = [
-    "info",
-    "ice",
-    "dtls",
-    "rtp",
-    "srtp",
-    "rtcp",
-    "rtx",
-    "bwe",
-    "score",
-    "simulcast",
-    "svc",
-]
-numWorkers = 4
+logTags = ["info", "ice", "dtls", "rtp", "srtp", "rtcp"]
+numWorkers = 4                                           # Will use CPU count but max of 4
 
-#router settings
+[router]
 [[router.mediaCodecs]]
 kind = "audio"
 mimeType = "audio/opus"
@@ -29,19 +25,60 @@ channels = 2
 kind = "video"
 mimeType = "video/VP8"
 clockRate = 90000
-
 [router.mediaCodecs.parameters]
 "x-google-start-bitrate" = 1000
 
-#webrtc transport settings
+[[router.mediaCodecs]]
+kind = "video"
+mimeType = "video/VP9"
+clockRate = 90000
+[router.mediaCodecs.parameters]
+"profile-id" = 2
+"x-google-start-bitrate" = 1000
+
+[[router.mediaCodecs]]
+kind = "video"
+mimeType = "video/h264"
+clockRate = 90000
+[router.mediaCodecs.parameters]
+"packetization-mode" = 1
+"profile-level-id" = "4d0032"
+"level-asymmetry-allowed" = 1
+"x-google-start-bitrate" = 1000
+
+[[router.mediaCodecs]]
+kind = "video"
+mimeType = "video/h264"
+clockRate = 90000
+[router.mediaCodecs.parameters]
+"packetization-mode" = 1
+"profile-level-id" = "42e01f"
+"level-asymmetry-allowed" = 1
+"x-google-start-bitrate" = 1000
+
 [webRtcTransport]
 initialAvailableOutgoingBitrate = 1000000
 minimumAvailableOutgoingBitrate = 600000
-maximumAvailableOutgoingBitrate = 10000000
+maxSctpMessageSize = 262144
+maxIncomingBitrate = 1500000
 
 [[webRtcTransport.listenIps]]
 ip = "0.0.0.0"
-# announcedIp = "192.168.1.1" # Uncomment and set to your public IP
+# announcedIp will be automatically set by the configuration loader
+# if not specified, it will use getPublicIP() function
 
 [webServer]
 port = 3000
+
+[redis]
+host = "localhost"
+port = 6379
+password = ""
+db = 0
+prefix = "mediasoup:"
+
+[kubernetes]
+enabled = false
+namespace = "default"
+podName = ""          # Will default to hostname
+podIp = ""            # Will be set by getLocalIp() function

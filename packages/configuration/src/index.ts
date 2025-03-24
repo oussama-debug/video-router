@@ -89,6 +89,13 @@ export const defaultConfiguration: MediasoupConfiguration = {
     port: 3000,
     host: "0.0.0.0",
   },
+  redis: {
+    host: "localhost",
+    port: 6379,
+    password: "",
+    db: 0,
+    prefix: "mediasoup:",
+  },
 };
 
 /**

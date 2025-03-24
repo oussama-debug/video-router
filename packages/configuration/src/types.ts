@@ -35,4 +35,12 @@ export interface MediasoupConfiguration {
       key: string;
     };
   };
+  //#redis settings
+  redis: {
+    host: string;
+    port: number;
+    password: string;
+    db: number;
+    prefix: string;
+  };
 }
